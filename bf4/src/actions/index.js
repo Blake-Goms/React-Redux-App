@@ -5,13 +5,13 @@ export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
 export const fetchPlayer = (char) => dispatch => {
-    console.log(char) //this is the user's name entered in search
+    //console.log(char) //this is the user's name entered in search
     dispatch({type: FETCH_START})
     axios
-        .get(`https://api.bf4stats.com/api/playerInfo?plat=pc&${char}=1`)
+        .get(`https://api.bf4stats.com/api/playerInfo?plat=pc&name=${char}`)       
         .then(res => {
             console.log(res)
-        dispatch({type: FETCH_SUCCESS, payload: res});
+            dispatch({type: FETCH_SUCCESS, payload: res.data});
     })
     .catch(err => {
         dispatch({type: FETCH_FAILURE, payload: err});

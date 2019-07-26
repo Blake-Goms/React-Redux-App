@@ -7,31 +7,44 @@ import {
 export const initialState = {
     error: '',
     isFetching: false,
-    playerInfo: null,
+    playerName: '',
+    playerPlat: '',
+    playerRank: '',
+    playerTime: null,
 } 
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {    
     switch (action.type) {
         case FETCH_START:
             return {
                 ...state,
                 error: '',
                 isFetching: true,
-                joke: ''
+                playerName: '',
+                playerPlat:'',
+                playerRank: '',
+                playerTime: null,
             };
         case FETCH_SUCCESS:
+                
             return {
                 ...state,
                 error: '',
                 isFetching: false,
-                playerInfo: action.payload
+                playerName: [action.payload.player.name],
+                playerPlat: [action.payload.player.plat],
+                playerRank: [action.payload.player.rank.name],
+                playerTime: [action.payload.player.timePlayed]
             };
             case FETCH_FAILURE:
             return {
                 ...state,
                 error: console.log(action.payload),
                 isFetching: false,
-                playerInfo: null
+                playerName: '',
+                playerPlat: '',
+                playerRank: '',
+                playerTime: null,
             };
         default:
             return state;
